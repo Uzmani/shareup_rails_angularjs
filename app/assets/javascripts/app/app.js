@@ -1,7 +1,7 @@
-angular.module('myApp', ['ngRoute', 'myApp.controllers', 'myApp.services'])
+angular.module('myApp', ['ngRoute', 'ngResource' 'myApp.controllers', 'myApp.services'])
 .config(function($routeProvider){
   $routeProvider.when('/', {
-    templateUrl: 'public/templates/dashboard.html',
+    templateUrl: '/templates/dashboard.html',
     controller: 'HomeController'
   })
   .otherwise({

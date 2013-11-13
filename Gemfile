@@ -40,7 +40,8 @@ gem 'uuidtools'
 gem 'angularjs-rails', '>= 1.2.0.rc1'
 gem 'ngmin-rails'
 
-gem 'bootstrap-sass-rails'
+
+gem 'zurb-foundation'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
