@@ -1,6 +1,5 @@
-angular.module('myApp.services', ['ngResource '])
+angular.module('myApp.services', ['ngResource'])
 .factory('ArticleService', function($http,$q){
-  console.log("ArticleService function was called");
   var service = { 
     getLatestFeed: function() {
       var d = $q.defer(); 
@@ -10,7 +9,6 @@ angular.module('myApp.services', ['ngResource '])
             'http://feeds.huffingtonpost.com/huffingtonpost/raw_feed'
           )
         ).then(function(data, status) {
-          console.log(data)
 // Huffpost data comes back as
 // data.data.responseData.feed.entries 
           if (data.status === 200)
@@ -24,21 +22,27 @@ angular.module('myApp.services', ['ngResource '])
   return service; 
 })
 .factory('Share', function($resource) {
-
+  var service = $resource('/shares/:id.json',
+    { id: '@id' },
+    {}
+    );
+  return service;
 })
-.factory('SessionService', function() {
+.factory('SessionService', function($http, $q) {
   var service = {
-    if (service.isAuthenticated()) {
-      return $q.when(service.currentUser);
-    }else {
-      return $http.get('/api/current_user').then(function(resp){
-        return service.currentUser = resp.data;
-      });
+    getCurrentUser: function() {
+      if (service.isAuthenticated()) {
+        return $q.when(service.currentUser);
+      }else {
+        return $http.get('/api/current_user').then(function(resp) {
+          return service.currentUser = resp.data;
+        });
+      }
+    },
+    currentUser: null,
+    isAuthenticated: function() {
+      return !!service.currentUser;
     }
-  },
-  currentUser: null,
-  isAuthenticated: function() {
-    return !!service.currentUser;
   };
   return service; 
 });

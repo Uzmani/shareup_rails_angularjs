@@ -3,7 +3,7 @@ class Users::SessionsController < Devise:: SessionsController
 
   def show_current_user
     reject_if_not_authorized_request!
-    render status 200,
+    render status: 200,
       json: {
         success: true,
         info: "Current user",
